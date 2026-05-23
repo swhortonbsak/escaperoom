@@ -73,12 +73,11 @@ function reducer(state: GameState, action: Action): GameState {
         action.fragment && !state.fragments.includes(action.fragment)
           ? [...state.fragments, action.fragment]
           : state.fragments;
-      const roomIndex = PUZZLE_ROOM_IDS.indexOf(action.room);
-      const nextRoom = PUZZLE_ROOM_IDS[roomIndex + 1] ?? 'complete';
       return {
         ...state,
         fragments,
-        currentRoom: action.room === 'vault' ? 'complete' : nextRoom,
+        // Stay on the completed room so the student sees the success screen
+        currentRoom: action.room,
         vaultUnlocked: action.room === 'vault' ? true : state.vaultUnlocked,
         rooms: {
           ...state.rooms,

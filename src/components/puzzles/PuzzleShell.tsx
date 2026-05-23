@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { PuzzleRoomId } from '../../types';
-import { usePuzzleEngine } from '../../context/usePuzzleEngine'
+import { PUZZLE_ROOM_IDS } from '../../types';
+import { usePuzzleEngine } from '../../context/usePuzzleEngine';
 import { getRoomMeta } from '../../context/puzzleMeta';
 import { HintSystem } from '../ui/HintSystem';
 import { Panel } from '../ui/Panel';
 import { Button } from '../ui/Button';
 import { SceneImage } from '../ui/SceneImage';
+import { RoomCompleteCelebration } from '../ui/RoomCompleteCelebration';
 import { getPuzzleScene } from '../../data/sceneImages';
 
 interface PuzzleShellProps {
@@ -16,6 +18,11 @@ interface PuzzleShellProps {
   onSubmit?: () => void;
   feedback?: { type: 'error' | 'success'; message: string } | null;
   successContent?: ReactNode;
+}
+
+function getNextRoomId(roomId: PuzzleRoomId): PuzzleRoomId | 'complete' {
+  const idx = PUZZLE_ROOM_IDS.indexOf(roomId);
+  return PUZZLE_ROOM_IDS[idx + 1] ?? 'complete';
 }
 
 export function PuzzleShell({
@@ -31,6 +38,12 @@ export function PuzzleShell({
   const scene = getPuzzleScene(roomId);
   const completed = state.rooms[roomId].completed;
 
+  useEffect(() => {
+    if (completed) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [completed]);
+
   const go = (room: PuzzleRoomId | 'intro' | 'complete') => {
     goToRoom(room);
     if (room === 'intro') navigate('/');
@@ -38,25 +51,37 @@ export function PuzzleShell({
     else navigate(`/play/${room}`);
   };
 
+  const continueToNext = () => {
+    const next = getNextRoomId(roomId);
+    go(next === 'complete' ? 'complete' : next);
+  };
+
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-      <Panel title={meta.title} subtitle={meta.subtitle} glow="cyan">
-        <SceneImage
-          src={scene.src}
-          alt={scene.alt}
-          caption={scene.caption}
-          completed={completed}
-          fragmentLabel={completed ? meta.keyFragment : undefined}
-          className="mb-5"
-        />
-        <p className="mb-4 text-sm leading-relaxed text-slate-300">{meta.briefing}</p>
-        <p className="mb-4 text-xs text-cyber-muted">
-          Est. {meta.expectedMinutes} min · Syllabus:{' '}
-          {meta.syllabusLinks.map((l) => l.specRef).join(', ')}
-        </p>
-
-        {!completed ? (
+      <Panel
+        title={completed ? undefined : meta.title}
+        subtitle={completed ? undefined : meta.subtitle}
+        glow={completed ? 'purple' : 'cyan'}
+      >
+        {completed ? (
+          <RoomCompleteCelebration
+            roomId={roomId}
+            onContinue={continueToNext}
+            onHub={() => go('intro')}
+          />
+        ) : (
           <>
+            <SceneImage
+              src={scene.src}
+              alt={scene.alt}
+              caption={scene.caption}
+              className="mb-5"
+            />
+            <p className="mb-4 text-sm leading-relaxed text-slate-300">{meta.briefing}</p>
+            <p className="mb-4 text-xs text-cyber-muted">
+              Est. {meta.expectedMinutes} min · Syllabus:{' '}
+              {meta.syllabusLinks.map((l) => l.specRef).join(', ')}
+            </p>
             {children}
             {feedback && (
               <motion.p
@@ -81,51 +106,25 @@ export function PuzzleShell({
               <HintSystem roomId={roomId} />
             </div>
           </>
-        ) : (
-          <div className="space-y-4">
-            <div className="rounded-lg border border-cyber-green/40 bg-cyber-green/10 p-4">
-              <p className="text-sm font-semibold text-cyber-green">Room secured</p>
-              <p className="mt-2 text-sm text-slate-300">{meta.successExplanation}</p>
-              <p className="mt-3 terminal-text text-lg font-bold text-cyber-cyan">
-                {meta.keyFragmentLabel}: {meta.keyFragment}
-              </p>
-              <p className="mt-1 text-xs text-cyber-muted">
-                Stack layer {meta.stackLayer}: {meta.stackLayerName}
-              </p>
-            </div>
-            {successContent}
-          </div>
         )}
+
+        {completed && successContent && <div className="mt-4">{successContent}</div>}
       </Panel>
 
-      <nav className="mt-4 flex flex-wrap gap-2">
-        {roomId !== 'room1' && (
-          <Button
-            variant="ghost"
-            onClick={() =>
-              go(`room${Number(roomId.replace('room', '')) - 1}` as PuzzleRoomId)
-            }
-          >
-            ← Previous room
-          </Button>
-        )}
-        {completed && roomId !== 'vault' && (
-          <Button
-            onClick={() => {
-              const n = Number(roomId.replace('room', '')) + 1;
-              go(n <= 6 ? (`room${n}` as PuzzleRoomId) : 'vault');
-            }}
-          >
-            Continue →
-          </Button>
-        )}
-        {completed && roomId === 'vault' && (
-          <Button onClick={() => go('complete')}>View debrief →</Button>
-        )}
-        <Button variant="ghost" onClick={() => go('intro')}>
-          Mission hub
-        </Button>
-      </nav>
+      {completed && (
+        <nav className="mt-4 flex flex-wrap gap-2">
+          {roomId !== 'room1' && (
+            <Button
+              variant="ghost"
+              onClick={() =>
+                go(`room${Number(roomId.replace('room', '')) - 1}` as PuzzleRoomId)
+              }
+            >
+              ← Previous room
+            </Button>
+          )}
+        </nav>
+      )}
     </motion.div>
   );
 }

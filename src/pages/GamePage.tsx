@@ -32,7 +32,7 @@ export function GamePage() {
     return <Navigate to="/" replace />;
   }
 
-  if (state.currentRoom === 'complete' || state.vaultUnlocked) {
+  if (state.currentRoom === 'complete') {
     return <Navigate to="/complete" replace />;
   }
 
@@ -47,11 +47,12 @@ export function GamePage() {
   }
 
   const Component = roomComponents[id];
+  const roomComplete = state.rooms[id].completed;
 
   return (
     <div className="space-y-4">
       <Component />
-      <MissionHub compact />
+      {!roomComplete && <MissionHub compact />}
     </div>
   );
 }
