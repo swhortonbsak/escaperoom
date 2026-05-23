@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Operation Blackout — Complete Step-by-Step Solution Guide</title>
+  <style>
+    @page { size: A4; margin: 18mm 15mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 11pt;
+      line-height: 1.55;
+      color: #111;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    h1 { font-size: 22pt; margin: 0 0 6pt; page-break-after: avoid; }
+    h2 { font-size: 15pt; margin: 28pt 0 10pt; border-bottom: 2px solid #0e7490; padding-bottom: 4pt; page-break-after: avoid; color: #0e7490; }
+    h3 { font-size: 12pt; margin: 16pt 0 8pt; page-break-after: avoid; color: #334155; }
+    h4 { font-size: 11pt; margin: 12pt 0 6pt; }
+    p { margin: 0 0 8pt; }
+    ul, ol { margin: 0 0 10pt; padding-left: 20pt; }
+    li { margin-bottom: 4pt; }
+    table { width: 100%; border-collapse: collapse; margin: 10pt 0 14pt; font-size: 10pt; page-break-inside: avoid; }
+    th, td { border: 1px solid #cbd5e1; padding: 6pt 8pt; text-align: left; vertical-align: top; }
+    th { background: #ecfeff; font-weight: bold; }
+    code, .mono { font-family: "Courier New", Consolas, monospace; font-size: 10pt; background: #f1f5f9; padding: 1pt 4pt; border-radius: 2pt; }
+    pre { font-family: "Courier New", Consolas, monospace; font-size: 9pt; background: #0f172a; color: #e2e8f0; padding: 10pt; border-radius: 4pt; overflow-x: auto; page-break-inside: avoid; white-space: pre-wrap; }
+    figure { margin: 12pt 0 16pt; page-break-inside: avoid; }
+    figure img { max-width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 4pt; }
+    figcaption { font-size: 9pt; color: #64748b; margin-top: 6pt; font-style: italic; }
+    .cover { text-align: center; padding: 40pt 0 30pt; page-break-after: always; }
+    .cover h1 { font-size: 28pt; }
+    .cover .sub { font-size: 13pt; color: #475569; margin-top: 8pt; }
+    .cover .warn { display: inline-block; margin-top: 24pt; padding: 8pt 14pt; border: 2px solid #dc2626; color: #991b1b; font-weight: bold; font-size: 10pt; }
+    .box { border: 1px solid #0e7490; background: #ecfeff; padding: 10pt 12pt; margin: 10pt 0; border-radius: 4pt; page-break-inside: avoid; }
+    .answer { border-left: 4px solid #16a34a; background: #f0fdf4; padding: 10pt 12pt; margin: 10pt 0; page-break-inside: avoid; }
+    .answer strong { color: #15803d; }
+    .tip { border-left: 4px solid #d97706; background: #fffbeb; padding: 8pt 12pt; margin: 10pt 0; font-size: 10pt; page-break-inside: avoid; }
+    .step-num { display: inline-block; background: #0e7490; color: #fff; font-weight: bold; padding: 2pt 8pt; border-radius: 3pt; font-size: 10pt; margin-right: 6pt; }
+    .toc { page-break-after: always; }
+    .toc ol { font-size: 11pt; }
+    .toc a { color: #0e7490; text-decoration: none; }
+    .page-break { page-break-before: always; }
+    footer { font-size: 9pt; color: #64748b; margin-top: 30pt; border-top: 1px solid #e2e8f0; padding-top: 8pt; }
+  </style>
+</head>
+<body>
+
+<section class="cover">
+  <p class="mono" style="letter-spacing: 2pt;">CAMBRIDGE INTERNATIONAL AS &amp; A LEVEL</p>
+  <h1>Operation Blackout</h1>
+  <p class="sub">Complete Step-by-Step Solution Guide<br/>Computer Science 9618 · Cyber Analyst Escape Room</p>
+  <p style="margin-top: 20pt;">Duration: 40–50 minutes · 6 puzzle rooms + final vault</p>
+  <span class="warn">CONFIDENTIAL — TEACHER USE ONLY</span>
+  <p style="margin-top: 30pt; font-size: 10pt; color: #64748b;">Do not distribute to students before the activity.<br/>Version 1.0 · Operation Blackout</p>
+</section>
+
+<section class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#part1">Part 1 — Running the activity</a></li>
+    <li><a href="#part2">Part 2 — Fragment map &amp; final vault logic</a></li>
+    <li><a href="#intro">Step 0 — Intro briefing</a></li>
+    <li><a href="#room1">Step 1 — Room 1: Corrupted Login Banner</a></li>
+    <li><a href="#room2">Step 2 — Room 2: Network Trace</a></li>
+    <li><a href="#room3">Step 3 — Room 3: Threat Console</a></li>
+    <li><a href="#room4">Step 4 — Room 4: Certificate Chain</a></li>
+    <li><a href="#room5">Step 5 — Room 5: Logic Lock</a></li>
+    <li><a href="#room6">Step 6 — Room 6: Algorithm Vault</a></li>
+    <li><a href="#vault">Step 7 — Final vault: Exam Archive</a></li>
+    <li><a href="#completion">Step 8 — Completion &amp; scoring</a></li>
+    <li><a href="#hints">Appendix A — Full hint sequences</a></li>
+    <li><a href="#syllabus">Appendix B — Syllabus mapping</a></li>
+    <li><a href="#quick">Appendix C — Quick answer card</a></li>
+  </ol>
+</section>
+
+<h2 id="part1">Part 1 — Running the activity</h2>
+
+<h3>Installation &amp; launch</h3>
+<ol>
+  <li>Open a terminal in the project folder.</li>
+  <li>Run <code>npm install</code> (first time only).</li>
+  <li>Run <code>npm run dev</code>.</li>
+  <li>Open the URL shown (typically <code>http://localhost:5173</code>).</li>
+</ol>
+
+<h3>Student flow</h3>
+<ol>
+  <li>Enter an optional callsign and click <strong>Accept mission</strong>.</li>
+  <li>Complete rooms 1–6 in order (Mission hub allows revisiting unlocked rooms).</li>
+  <li>Use up to three hints per room (−35 score points each).</li>
+  <li>Collect six hex fragments; unlock the vault when all six are secured.</li>
+  <li>View debrief and local leaderboard on completion.</li>
+</ol>
+
+<h3>Teacher mode (in-app)</h3>
+<p>Navigate to <code>/teacher</code> or click <strong>Teacher mode</strong> in the header for live answers, syllabus links, reset progress, and leaderboard reset.</p>
+
+<figure>
+  <img src="images/step-00-intro.png" alt="Mission intro overview" width="700" />
+  <figcaption>Figure 1 — Operation Blackout mission overview.</figcaption>
+</figure>
+
+<h2 id="part2">Part 2 — Fragment map &amp; final vault logic</h2>
+
+<p>Each room awards one <strong>two-digit hexadecimal byte</strong>. The final vault is a <em>meta-puzzle</em>: students must reorder fragments by TCP/IP stack layer (lowest first), concatenate the hex bytes, convert to ASCII, and type the phrase.</p>
+
+<table>
+  <tr><th>Stack layer</th><th>Room</th><th>Fragment (hex)</th><th>Denary</th><th>ASCII</th><th>Label in game</th></tr>
+  <tr><td>1 — Physical</td><td>Room 5 (Logic Lock)</td><td><code>53</code></td><td>83</td><td>S</td><td>S1</td></tr>
+  <tr><td>2 — Data Link</td><td>Room 1 (Login Banner)</td><td><code>45</code></td><td>69</td><td>E</td><td>E4</td></tr>
+  <tr><td>3 — Network</td><td>Room 2 (Network Trace)</td><td><code>43</code></td><td>67</td><td>C</td><td>C3</td></tr>
+  <tr><td>4 — Transport</td><td>Room 4 (Certificate Chain)</td><td><code>55</code></td><td>85</td><td>U</td><td>U7</td></tr>
+  <tr><td>5 — Session</td><td>Room 3 (Threat Console)</td><td><code>52</code></td><td>82</td><td>R</td><td>R5</td></tr>
+  <tr><td>7 — Application</td><td>Room 6 (Algorithm Vault)</td><td><code>45</code></td><td>69</td><td>E</td><td>E9</td></tr>
+</table>
+
+<div class="answer">
+  <strong>Final vault order (by layer):</strong> Room 5 → Room 1 → Room 2 → Room 4 → Room 3 → Room 6<br/>
+  <strong>Hex sequence:</strong> <code>53 45 43 55 52 45</code><br/>
+  <strong>ASCII unlock phrase:</strong> <code>SECURE</code>
+</div>
+
+<figure>
+  <img src="images/tcp-ip-fragment-order.png" alt="TCP/IP layer fragment ordering" width="700" />
+  <figcaption>Figure 2 — Ordering fragments by stack layer produces the vault phrase.</figcaption>
+</figure>
+
+<h2 id="intro" class="page-break">Step 0 — Intro briefing (2–3 minutes)</h2>
+
+<p><span class="step-num">0</span>Students read the classified briefing and click <strong>Accept mission</strong>. No puzzle input is required.</p>
+
+<p><strong>Teaching notes:</strong> Emphasise this is defensive cyber forensics only — simulated logs and toy examples. Clarify that hints reduce score but never block progress.</p>
+
+<h2 id="room1">Step 1 — Room 1: The Corrupted Login Banner (~7 min)</h2>
+
+<p><strong>Syllabus:</strong> §3.1 Number systems · §3.2 Character sets · Two's complement</p>
+
+<figure>
+  <img src="images/room1-binary-decoding.png" alt="Room 1 binary decoding reference" width="700" />
+  <figcaption>Figure 3 — Data representation: binary, hex, ASCII, and distractors.</figcaption>
+</figure>
+
+<h3>What students see</h3>
+<p>A corrupted login banner with five data blocks:</p>
+<table>
+  <tr><th>Block</th><th>Value</th><th>Type</th></tr>
+  <tr><td>BLOCK_A</td><td><code>01010011</code></td><td>8-bit binary</td></tr>
+  <tr><td>BLOCK_B</td><td><code>11111111</code></td><td>8-bit binary (two's complement)</td></tr>
+  <tr><td>BLOCK_C</td><td><code>100000000</code></td><td>9-bit binary (invalid)</td></tr>
+  <tr><td>BLOCK_D</td><td><code>01000101</code></td><td>8-bit binary</td></tr>
+  <tr><td>CHECKSUM</td><td><code>85</code></td><td>Denary (distractor)</td></tr>
+</table>
+
+<h3>Step-by-step solution</h3>
+
+<h4>Question 1: BLOCK_A (01010011) as unsigned denary</h4>
+<p>Convert 8-bit binary to denary by summing place values:</p>
+<pre>Bit positions:  128  64  32  16   8   4   2   1
+BLOCK_A:          0   1   0   1   0   0   1   1
+
+64 + 16 + 2 + 1 = 83</pre>
+<div class="answer"><strong>Answer:</strong> <code>83</code> (This is ASCII character 'S', but the fragment comes from a separate question.)</div>
+
+<h4>Question 2: Denary 69 as hexadecimal (2 digits)</h4>
+<p>Divide by 16 repeatedly:</p>
+<pre>69 ÷ 16 = 4 remainder 5
+Therefore 69₁₀ = 45₁₆</pre>
+<p>Check: BLOCK_D is <code>01000101</code> = 64+4+1 = 69 = ASCII 'E'.</p>
+<div class="answer"><strong>Answer:</strong> <code>45</code></div>
+
+<h4>Question 3: BLOCK_B (11111111) in 8-bit two's complement</h4>
+<p>In 8-bit two's complement, the MSB indicates sign. All bits set in 8 bits represents −1.</p>
+<pre>11111111 (8-bit two's complement) = -1</pre>
+<p>This is a <strong>distractor</strong> — not a printable ASCII banner character.</p>
+<div class="answer"><strong>Answer:</strong> <code>-1</code></div>
+
+<h4>Question 4: Which block is invalid due to bit-length?</h4>
+<p>ASCII bytes are exactly 8 bits. BLOCK_C has 9 bits (<code>100000000</code>) — overflow/invalid.</p>
+<div class="answer"><strong>Answer:</strong> <code>C</code></div>
+
+<h4>Question 5: Key fragment (2-digit hex)</h4>
+<p>Enter the hex from Question 2.</p>
+<div class="answer"><strong>Answer:</strong> <code>45</code> · Fragment E4 · Data Link layer (2)</div>
+
+<div class="tip"><strong>Common errors:</strong> Treating 11111111 as denary 255; decoding the 9-bit block; using checksum 85 → hex 55 (that is 'U', a distractor).</div>
+
+<h2 id="room2" class="page-break">Step 2 — Room 2: The Network Trace (~7 min)</h2>
+
+<p><strong>Syllabus:</strong> §4.1 LAN/WAN · DNS · TCP/IP · packet switching · public/private IP</p>
+
+<figure>
+  <img src="images/room2-packet-order.png" alt="Network packet order diagram" width="700" />
+  <figcaption>Figure 4 — Correct chronological order of network events.</figcaption>
+</figure>
+
+<h3>What students see</h3>
+<p>A network map (client 192.168.12.8 → gateway/NAT → server 203.0.113.44:443) and five shuffled packet events to reorder, plus a security implication multiple-choice question.</p>
+
+<h3>Step-by-step solution</h3>
+
+<h4>Part A — Order events (earliest first)</h4>
+<ol>
+  <li><strong>DNS lookup</strong> — Hostname <code>archive.uni-lab.edu</code> must resolve to IP 203.0.113.44 before any connection.</li>
+  <li><strong>TCP SYN</strong> — Client initiates TCP handshake to port 443.</li>
+  <li><strong>Router forward</strong> — Packet NAT'd (192.168.12.8 → public) and routed via ISP.</li>
+  <li><strong>HTTP GET /vault</strong> — TLS established; request/response over encrypted channel.</li>
+  <li><strong>TCP FIN</strong> — Connection closed after response.</li>
+</ol>
+<div class="answer"><strong>Order:</strong> DNS → SYN → Route → HTTP → FIN</div>
+
+<h4>Part B — Security implication</h4>
+<p>The trace shows private IP <code>192.168.12.8</code> — a reconnaissance risk if logs are exposed (attackers map internal topology). TLS is in use (not HTTP-only); DNS being down would prevent connection entirely.</p>
+<div class="answer"><strong>Answer:</strong> Private IP visible in trace — reconnaissance risk</div>
+
+<p>No separate fragment field in Room 2 — completing the room awards fragment automatically on success.</p>
+<div class="answer"><strong>Fragment:</strong> <code>43</code> (ASCII C) · Fragment C3 · Network layer (3)</div>
+
+<h2 id="room3">Step 3 — Room 3: The Threat Console (~7 min)</h2>
+
+<p><strong>Syllabus:</strong> §6.1 Security · malware · phishing · privacy vs integrity</p>
+
+<figure>
+  <img src="images/room3-threat-matching.png" alt="Threat to countermeasure matching" width="700" />
+  <figcaption>Figure 5 — Match each incident to the best countermeasure.</figcaption>
+</figure>
+
+<h3>Step-by-step solution</h3>
+
+<table>
+  <tr><th>Incident</th><th>Correct countermeasure</th><th>Reasoning</th></tr>
+  <tr><td>Credential harvest email (phishing)</td><td>Security awareness training + email filtering</td><td>Users surrendered valid passwords willingly — stronger password policy alone fails.</td></tr>
+  <tr><td>DNS redirect (pharming)</td><td>Verify digital certificates &amp; monitor DNS/hosts</td><td>Attack redirects to look-alike site; certificate verification catches impersonation.</td></tr>
+  <tr><td>Encrypted file shares (ransomware)</td><td>Offline backups + anti-malware scan</td><td>Restore from clean backup; scan to remove malware.</td></tr>
+  <tr><td>Keylogger (spyware)</td><td>Anti-spyware scan + least-privilege accounts</td><td>Detect/remove spyware; limit account privileges.</td></tr>
+  <tr><td>Repeated login attempts (brute force)</td><td>Account lockout + two-factor authentication</td><td>Rate-limit guesses; 2FA adds second factor.</td></tr>
+  <tr><td>Altered audit records (integrity breach)</td><td>Integrity checks (hashing/audit trails)</td><td>Data was modified — need integrity verification, not just encryption.</td></tr>
+</table>
+
+<h4>Fragment field</h4>
+<p>Students enter hex for letter R (integrity / access rights theme): R = denary 82 = hex <code>52</code>.</p>
+<div class="answer"><strong>Fragment:</strong> <code>52</code> · Fragment R5 · Session layer (5)</div>
+
+<h2 id="room4" class="page-break">Step 4 — Room 4: The Certificate Chain (~7 min)</h2>
+
+<p><strong>Syllabus:</strong> §17.1 Symmetric/asymmetric encryption · TLS · digital certificates · signatures</p>
+
+<figure>
+  <img src="images/room4-certificate-chain.png" alt="TLS certificate chain solution" width="700" />
+  <figcaption>Figure 6 — Key assignments for TLS operations.</figcaption>
+</figure>
+
+<h3>Step-by-step solution</h3>
+
+<table>
+  <tr><th>Operation</th><th>Assign</th><th>Explanation</th></tr>
+  <tr><td>Encrypt exam archive stream (bulk data)</td><td>Symmetric session key</td><td>Fast symmetric encryption for large payloads after handshake.</td></tr>
+  <tr><td>Encrypt session key for server</td><td>Server's public key</td><td>Client encrypts session key so only server can read it.</td></tr>
+  <tr><td>Decrypt session key</td><td>Server's private key</td><td>Only server possesses private key to decrypt.</td></tr>
+  <tr><td>Sign handshake message</td><td>Server's private key</td><td>Proves server identity (digital signature).</td></tr>
+  <tr><td>Verify server signature</td><td>Server's public key</td><td>Client verifies signature with server's public key.</td></tr>
+</table>
+
+<h4>Reject untrusted certificate</h4>
+<p>Select the certificate issued by <code>UnknownCA Self-Signed</code> — not trusted by the lab CA chain. Keep <code>Cambridge Research CA</code> certificate.</p>
+
+<h4>Fragment field</h4>
+<p>U = denary 85 = hex <code>55</code>.</p>
+<div class="answer"><strong>Fragment:</strong> <code>55</code> · Fragment U7 · Transport layer (4)</div>
+
+<h2 id="room5">Step 5 — Room 5: The Logic Lock (~6 min)</h2>
+
+<p><strong>Syllabus:</strong> §3.2 Logic gates · §15.2 Boolean algebra</p>
+
+<figure>
+  <img src="images/room5-logic-lock.png" alt="Logic lock Boolean solution" width="700" />
+  <figcaption>Figure 7 — Boolean rule and truth table.</figcaption>
+</figure>
+
+<h3>English rule</h3>
+<p><em>Open only if the admin card is valid AND either the biometric match is true OR the emergency override is active — but never if lockdown is active.</em></p>
+
+<p><strong>Variables:</strong> A = admin card · B = biometric · E = emergency override · L = lockdown</p>
+
+<h3>Step-by-step solution</h3>
+
+<h4>Boolean expression</h4>
+<pre>A AND (B OR E) AND NOT L</pre>
+<p>Brackets essential: without them, operator precedence gives wrong results.</p>
+
+<h4>Truth table (given rows)</h4>
+<table>
+  <tr><th>A</th><th>B</th><th>E</th><th>L</th><th>Open?</th><th>Working</th></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td><td>Admin valid, no lockdown → open</td></tr>
+  <tr><td>1</td><td>0</td><td>0</td><td>1</td><td><strong>0</strong></td><td>Lockdown active → always closed</td></tr>
+  <tr><td>0</td><td>1</td><td>1</td><td>0</td><td><strong>0</strong></td><td>No admin card → closed despite B and E</td></tr>
+</table>
+
+<h4>Fragment field</h4>
+<p>S = denary 83 = hex <code>53</code>.</p>
+<div class="answer"><strong>Fragment:</strong> <code>53</code> · Fragment S1 · Physical layer (1)</div>
+
+<h2 id="room6" class="page-break">Step 6 — Room 6: The Algorithm Vault (~7 min)</h2>
+
+<p><strong>Syllabus:</strong> §9.2 Searching/sorting · §19.1 Recursion · ADTs · Big O</p>
+
+<figure>
+  <img src="images/room6-algorithms.png" alt="Algorithm vault solution" width="700" />
+  <figcaption>Figure 8 — Pseudocode analysis answers.</figcaption>
+</figure>
+
+<h3>Step-by-step solution</h3>
+
+<h4>1. Search type (list unsorted after breach)</h4>
+<p>Binary search requires sorted data. The pseudocode falls through to the FOR loop (linear search) when unsorted.</p>
+<div class="answer"><strong>Answer:</strong> linear search</div>
+
+<h4>2. ADT for recursive call frames</h4>
+<p>Each recursive call pushes a stack frame; returns pop frames — LIFO = stack.</p>
+<div class="answer"><strong>Answer:</strong> Stack (LIFO)</div>
+
+<h4>3. Trace factorial(4)</h4>
+<pre>factorial(4) = 4 × factorial(3)
+factorial(3) = 3 × factorial(2)
+factorial(2) = 2 × factorial(1)
+factorial(1) = 1
+
+Unwind: 1 → 2×1=2 → 3×2=6 → 4×6=24</pre>
+<div class="answer"><strong>Answer:</strong> <code>24</code></div>
+
+<h4>4. Merge sort complexity</h4>
+<p>Merge sort is O(n log n) — not O(n²) like bubble sort.</p>
+<div class="answer"><strong>Answer:</strong> O(n log n)</div>
+
+<h4>5. Fragment field</h4>
+<p>E = denary 69 = hex <code>45</code>.</p>
+<div class="answer"><strong>Fragment:</strong> <code>45</code> · Fragment E9 · Application layer (7)</div>
+
+<h4>6. Optional bonus (+75 points)</h4>
+<div class="answer"><strong>Answer:</strong> <code>OOP</code> (paradigm mixing procedures with objects)</div>
+
+<h2 id="vault">Step 7 — Final vault: Exam Archive (~5 min)</h2>
+
+<figure>
+  <img src="images/final-vault-secure.png" alt="Final vault SECURE solution" width="700" />
+  <figcaption>Figure 9 — Assembling fragments into the unlock phrase.</figcaption>
+</figure>
+
+<h3>Prerequisites</h3>
+<p>All six rooms must be completed. Vault unlocks when six fragments appear in the progress tracker.</p>
+
+<h3>Step-by-step solution</h3>
+
+<ol>
+  <li><strong>Identify layer tags</strong> — Each fragment card shows its TCP/IP layer from room success screens (Physical=1, Data Link=2, … Application=7).</li>
+  <li><strong>Reorder fragments</strong> — Sort from lowest layer number upward:
+    <ul>
+      <li>Layer 1: Room 5 → <code>53</code></li>
+      <li>Layer 2: Room 1 → <code>45</code></li>
+      <li>Layer 3: Room 2 → <code>43</code></li>
+      <li>Layer 4: Room 4 → <code>55</code></li>
+      <li>Layer 5: Room 3 → <code>52</code></li>
+      <li>Layer 7: Room 6 → <code>45</code></li>
+    </ul>
+  </li>
+  <li><strong>Concatenate hex:</strong> <code>534543555245</code></li>
+  <li><strong>Convert pairs to ASCII:</strong>
+    <pre>53 → S    45 → E    43 → C    55 → U    52 → R    45 → E</pre>
+  </li>
+  <li><strong>Enter vault unlock phrase:</strong> <code>SECURE</code></li>
+</ol>
+
+<div class="answer"><strong>Final answer:</strong> Reorder by layer · Type <code>SECURE</code></div>
+
+<div class="tip"><strong>Common error:</strong> Ordering by room number 1–6 instead of stack layer gives wrong letters.</div>
+
+<h2 id="completion">Step 8 — Completion &amp; scoring</h2>
+
+<figure>
+  <img src="images/step-09-completion.png" alt="Completion screen" width="700" />
+  <figcaption>Figure 10 — Mission complete debrief.</figcaption>
+</figure>
+
+<table>
+  <tr><th>Component</th><th>Detail</th></tr>
+  <tr><td>Base score</td><td>1000 points</td></tr>
+  <tr><td>Time bonus</td><td>Up to ~450 pts (faster than 45 min target)</td></tr>
+  <tr><td>Hint penalty</td><td>−35 per hint used (any room)</td></tr>
+  <tr><td>Attempt penalty</td><td>−12 per incorrect submit beyond 6 total</td></tr>
+  <tr><td>Room 6 bonus</td><td>+75 for answering OOP</td></tr>
+  <tr><td>Minimum score</td><td>100 (floor)</td></tr>
+</table>
+
+<h2 id="hints" class="page-break">Appendix A — Full hint sequences</h2>
+
+<h3>Room 1</h3>
+<ol>
+  <li>Each valid character byte is exactly 8 bits. Group binary in eights before converting to denary.</li>
+  <li>01010011 → 83 denary. To get the fragment, convert denary 69 to hexadecimal.</li>
+  <li>69 ÷ 16 = 4 remainder 5, so the fragment is 45. Ignore 11111111 (−1) and the 9-bit overflow value.</li>
+</ol>
+
+<h3>Room 2</h3>
+<ol>
+  <li>DNS must resolve the hostname before any TCP connection to the server IP.</li>
+  <li>Order: DNS → SYN → routed request → HTTP 200 → FIN. Pick the reconnaissance risk about private IPs.</li>
+  <li>Event order: dns, syn, route, http, fin. Security: private IP leak. Fragment: 43.</li>
+</ol>
+
+<h3>Room 3</h3>
+<ol>
+  <li>Ask: does the countermeasure match the attack vector? Strong passwords do not stop phishing.</li>
+  <li>Phishing→training; Pharming→certs; Ransomware→backup; Spyware→anti-spyware; Brute→lockout; Hospital→integrity.</li>
+  <li>Full match table in main guide. Fragment: 52.</li>
+</ol>
+
+<h3>Room 4</h3>
+<ol>
+  <li>Bulk data uses symmetric encryption. Key exchange and signatures use asymmetric keys.</li>
+  <li>Encrypt with recipient public key; decrypt with private. Sign with sender private; verify with public.</li>
+  <li>Reject UnknownCA certificate. Fragment: 55.</li>
+</ol>
+
+<h3>Room 5</h3>
+<ol>
+  <li>Lockdown active (L=1) should force the door closed regardless of other sensors.</li>
+  <li>Structure: admin AND (biometric OR emergency) AND NOT lockdown.</li>
+  <li>Expression: A AND (B OR E) AND NOT L. Truth rows: (1,0,0,0)→1; (1,0,0,1)→0; (0,1,1,0)→0. Fragment: 53.</li>
+</ol>
+
+<h3>Room 6</h3>
+<ol>
+  <li>Binary search needs sorted data. Recursion uses a call stack — last in, first out.</li>
+  <li>Unsorted → linear search. Stack ADT. factorial(4)=24. Merge sort → O(n log n).</li>
+  <li>Answers: linear, stack, 24, O(n log n). Fragment: 45.</li>
+</ol>
+
+<h3>Vault</h3>
+<ol>
+  <li>Each fragment card shows its stack layer. Sort from layer 1 upward.</li>
+  <li>Order: S1(53) → E4(45) → C3(43) → U7(55) → R5(52) → E9(45).</li>
+  <li>Concatenated hex converts to ASCII unlock phrase: SECURE.</li>
+</ol>
+
+<h2 id="syllabus">Appendix B — Syllabus mapping (9618)</h2>
+
+<table>
+  <tr><th>Topic area</th><th>Spec ref</th><th>Room(s)</th></tr>
+  <tr><td>Binary, hex, ASCII, two's complement</td><td>§3.1, §3.2</td><td>Room 1, 5</td></tr>
+  <tr><td>Networks, DNS, TCP/IP, routing</td><td>§4.1</td><td>Room 2, Vault</td></tr>
+  <tr><td>Security threats &amp; countermeasures</td><td>§6.1</td><td>Room 3</td></tr>
+  <tr><td>Encryption, TLS, certificates</td><td>§17.1</td><td>Room 4</td></tr>
+  <tr><td>Logic gates, Boolean algebra</td><td>§3.2, §15.2</td><td>Room 5</td></tr>
+  <tr><td>Algorithms, ADTs, recursion, Big O</td><td>§9.2, §19.1</td><td>Room 6</td></tr>
+</table>
+
+<h2 id="quick">Appendix C — Quick answer card</h2>
+
+<pre>INTRO: Accept mission (no answers)
+
+ROOM 1:
+  BLOCK_A denary = 83
+  Denary 69 hex = 45
+  BLOCK_B two's complement = -1
+  Invalid block = C
+  Fragment = 45
+
+ROOM 2:
+  Order = DNS → SYN → Route → HTTP → FIN
+  Security = Private IP reconnaissance risk
+  Fragment = 43
+
+ROOM 3:
+  Phish → user education + email filter
+  Pharm → verify certificates
+  Ransom → offline backup + AV
+  Spy → anti-spyware
+  Brute → lockout + 2FA
+  Hospital → integrity checks
+  Fragment = 52
+
+ROOM 4:
+  Bulk encrypt → symmetric key
+  Encrypt session key → server public
+  Decrypt session key → server private
+  Sign → server private
+  Verify → server public
+  Reject → UnknownCA cert
+  Fragment = 55
+
+ROOM 5:
+  Expression = A AND (B OR E) AND NOT L
+  Truth: (1,0,0,0)→1  (1,0,0,1)→0  (0,1,1,0)→0
+  Fragment = 53
+
+ROOM 6:
+  Search = linear | ADT = stack | factorial(4) = 24
+  Merge sort = O(n log n) | Bonus = OOP
+  Fragment = 45
+
+VAULT:
+  Layer order: room5→1→2→4→3→6
+  Hex: 534543555245
+  Phrase: SECURE</pre>
+
+<footer>
+  Operation Blackout · Cambridge International AS &amp; A Level Computer Science 9618 · Complete Solution Guide v1.0<br/>
+  Generated for classroom use · Teacher confidential · In-app teacher mode: /teacher
+</footer>
+
+</body>
+</html>

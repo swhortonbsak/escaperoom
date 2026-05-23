@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operation Blackout — Teacher's Solution Guide</title>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --panel: #111827;
+      --border: #1e293b;
+      --cyan: #00f0ff;
+      --purple: #a855f7;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    header {
+      border-bottom: 2px solid var(--cyan);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      margin: 0 0 0.25rem;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    header .sub { color: var(--muted); font-size: 0.95rem; }
+    header .warn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.4rem 0.75rem;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 4px;
+      color: #fca5a5;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .toc {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .toc h2 { margin-top: 0; font-size: 1.1rem; color: var(--cyan); }
+    .toc ol { margin: 0; padding-left: 1.25rem; }
+    .toc a { color: var(--purple); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 1rem;
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      color: var(--cyan);
+      border-left: 4px solid var(--purple);
+      padding-left: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    section .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    figure {
+      margin: 1.25rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    figcaption {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+    }
+
+    th { background: rgba(0, 240, 255, 0.08); color: var(--cyan); }
+    tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+    .answer-box {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .answer-box strong { color: var(--green); }
+
+    code, .mono {
+      font-family: "JetBrains Mono", Consolas, monospace;
+      background: rgba(0,0,0,0.35);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    .tip {
+      border-left: 3px solid var(--amber);
+      padding: 0.75rem 1rem;
+      background: rgba(245, 158, 11, 0.08);
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .print-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--cyan);
+      color: #000;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,240,255,0.3);
+      z-index: 100;
+    }
+
+    .print-btn:hover { filter: brightness(1.1); }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      .print-btn { display: none; }
+      .wrap { max-width: 100%; padding: 0; }
+      figure { break-inside: avoid; }
+      section { break-inside: avoid-page; }
+      header .warn { border-color: #c00; color: #900; background: #fee; }
+      th { background: #eee; color: #111; }
+      section h2 { color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+
+  <div class="wrap">
+    <header>
+      <h1>Operation Blackout</h1>
+      <p class="sub">Teacher's Solution Guide · Cambridge International AS &amp; A Level Computer Science 9618</p>
+      <span class="warn">CONFIDENTIAL — Teacher use only. Do not share with students before the activity.</span>
+    </header>
+
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#intro">Before you start</a></li>
+        <li><a href="#fragments">Fragment &amp; vault overview</a></li>
+        <li><a href="#room1">Room 1 — Corrupted Login Banner</a></li>
+        <li><a href="#room2">Room 2 — Network Trace</a></li>
+        <li><a href="#room3">Room 3 — Threat Console</a></li>
+        <li><a href="#room4">Room 4 — Certificate Chain</a></li>
+        <li><a href="#room5">Room 5 — Logic Lock</a></li>
+        <li><a href="#room6">Room 6 — Algorithm Vault</a></li>
+        <li><a href="#vault">Final vault — SECURE</a></li>
+        <li><a href="#completion">Completion &amp; scoring</a></li>
+        <li><a href="#plenary">Plenary questions</a></li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>Before you start</h2>
+      <p class="meta">Duration: 40–50 min · Teacher mode: <code>/teacher</code> · App: <code>npm run dev</code></p>
+
+      <figure>
+        <img src="images/step-00-intro.png" alt="Operation Blackout intro overview for teachers" />
+        <figcaption>Figure 1 — Mission overview: six fragments, one vault, defensive cyber theme.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Phase</th><th>Time</th></tr>
+        <tr><td>Intro briefing</td><td>2–3 min</td></tr>
+        <tr><td>Rooms 1–6</td><td>~6–7 min each</td></tr>
+        <tr><td>Final vault</td><td>4–5 min</td></tr>
+        <tr><td>Plenary (optional)</td><td>10 min</td></tr>
+      </table>
+
+      <p>Students click <strong>Accept mission</strong>, work through rooms in order (they may revisit via Mission hub), use up to three hints per room (−35 pts each), and combine fragments at the vault.</p>
+    </section>
+
+    <section id="fragments">
+      <h2>Fragment &amp; vault overview</h2>
+      <p>Each room awards a two-digit hex byte. The vault requires ordering by <strong>TCP/IP stack layer</strong> (lowest first), then converting hex → ASCII.</p>
+
+      <figure>
+        <img src="images/tcp-ip-fragment-order.png" alt="TCP/IP layer order for hex fragments producing SECURE" />
+        <figcaption>Figure 2 — Stack layer order determines the final unlock phrase.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Layer</th><th>Room</th><th>Fragment</th><th>ASCII</th></tr>
+        <tr><td>1 Physical</td><td>Room 5</td><td class="mono">53</td><td>S</td></tr>
+        <tr><td>2 Data Link</td><td>Room 1</td><td class="mono">45</td><td>E</td></tr>
+        <tr><td>3 Network</td><td>Room 2</td><td class="mono">43</td><td>C</td></tr>
+        <tr><td>4 Transport</td><td>Room 4</td><td class="mono">55</td><td>U</td></tr>
+        <tr><td>5 Session</td><td>Room 3</td><td class="mono">52</td><td>R</td></tr>
+        <tr><td>7 Application</td><td>Room 6</td><td class="mono">45</td><td>E</td></tr>
+      </table>
+
+      <div class="answer-box">
+        <strong>Final answer:</strong> Order rooms 5→1→2→4→3→6 · Hex <code class="mono">534543555245</code> · Phrase <code class="mono">SECURE</code>
+      </div>
+    </section>
+
+    <section id="room1">
+      <h2>Room 1 — The Corrupted Login Banner</h2>
+      <p class="meta">Syllabus §3.1 · Binary, hex, ASCII, two's complement · ~7 min · Fragment: <code class="mono">45</code></p>
+
+      <figure>
+        <img src="images/room1-binary-decoding.png" alt="Binary and hex decoding reference for Room 1" />
+        <figcaption>Figure 3 — Decoding path and distractors for the corrupted login banner.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Field</th><th>Answer</th><th>Notes</th></tr>
+        <tr><td>BLOCK_A (01010011) denary</td><td class="mono">83</td><td>Valid 8-bit byte → 'S'</td></tr>
+        <tr><td>Denary 69 as hex</td><td class="mono">45</td><td>69 ÷ 16 = 4 r 5</td></tr>
+        <tr><td>BLOCK_B two's complement</td><td class="mono">-1</td><td>Not a printable character</td></tr>
+        <tr><td>Invalid block</td><td class="mono">C</td><td>100000000 is 9-bit overflow</td></tr>
+        <tr><td>Key fragment</td><td class="mono">45</td><td>ASCII letter E</td></tr>
+      </table>
+
+      <div class="tip"><strong>Misconception:</strong> Students treat 11111111 as 255 instead of −1, or attempt to decode the 9-bit block.</div>
+    </section>
+
+    <section id="room2">
+      <h2>Room 2 — The Network Trace</h2>
+      <p class="meta">Syllabus §4.1 · DNS, TCP/IP, routing · ~7 min · Fragment: <code class="mono">43</code></p>
+
+      <figure>
+        <img src="images/room2-packet-order.png" alt="Correct packet event order from DNS to FIN" />
+        <figcaption>Figure 4 — Packet trace order: DNS → SYN → Route → HTTP → FIN.</figcaption>
+      </figure>
+
+      <div class="answer-box">
+        <strong>Event order:</strong> DNS lookup → TCP SYN → Router forward → HTTP GET → TCP FIN<br />
+        <strong>Security:</strong> Private IP visible in trace — reconnaissance risk<br />
+        <strong>Fragment:</strong> <code class="mono">43</code> (ASCII C)
+      </div>
+
+      <div class="tip"><strong>Misconception:</strong> Placing HTTP before the TCP handshake, or DNS after connection setup.</div>
+    </section>
+
+    <section id="room3">
+      <h2>Room 3 — The Threat Console</h2>
+      <p class="meta">Syllabus §6.1 · Threats &amp; countermeasures · ~7 min · Fragment: <code class="mono">52</code></p>
+
+      <figure>
+        <img src="images/room3-threat-matching.png" alt="Threat to countermeasure matching answer key" />
+        <figcaption>Figure 5 — Incident triage: match each threat to the best defensive response.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Incident</th><th>Countermeasure</th></tr>
+        <tr><td>Phishing email</td><td>Security awareness training + email filtering</td></tr>
+        <tr><td>Pharming / DNS redirect</td><td>Verify digital certificates &amp; monitor DNS/hosts</td></tr>
+        <tr><td>Ransomware</td><td>Offline backups + anti-malware scan</td></tr>
+        <tr><td>Spyware / keylogger</td><td>Anti-spyware + least-privilege accounts</td></tr>
+        <tr><td>Brute-force login</td><td>Account lockout + two-factor authentication</td></tr>
+        <tr><td>Altered audit records</td><td>Integrity checks (hashing/audit trails)</td></tr>
+      </table>
+
+      <div class="answer-box"><strong>Fragment:</strong> <code class="mono">52</code> (ASCII R)</div>
+      <div class="tip"><strong>Key teaching point:</strong> A strong password does <em>not</em> stop phishing. Altered records = integrity, not just privacy.</div>
+    </section>
+
+    <section id="room4">
+      <h2>Room 4 — The Certificate Chain</h2>
+      <p class="meta">Syllabus §17.1 · TLS, keys, certificates · ~7 min · Fragment: <code class="mono">55</code></p>
+
+      <figure>
+        <img src="images/room4-certificate-chain.png" alt="TLS key assignments and fake certificate rejection" />
+        <figcaption>Figure 6 — Symmetric bulk encryption; asymmetric key exchange and signatures.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Operation</th><th>Key</th></tr>
+        <tr><td>Encrypt archive stream</td><td>Symmetric session key</td></tr>
+        <tr><td>Encrypt session key</td><td>Server's public key</td></tr>
+        <tr><td>Decrypt session key</td><td>Server's private key</td></tr>
+        <tr><td>Sign handshake</td><td>Server's private key</td></tr>
+        <tr><td>Verify signature</td><td>Server's public key</td></tr>
+      </table>
+
+      <div class="answer-box">
+        <strong>Reject:</strong> Certificate from <code class="mono">UnknownCA Self-Signed</code><br />
+        <strong>Fragment:</strong> <code class="mono">55</code> (ASCII U)
+      </div>
+    </section>
+
+    <section id="room5">
+      <h2>Room 5 — The Logic Lock</h2>
+      <p class="meta">Syllabus §3.2, §15.2 · Boolean logic · ~6 min · Fragment: <code class="mono">53</code></p>
+
+      <figure>
+        <img src="images/room5-logic-lock.png" alt="Boolean expression and truth table solution" />
+        <figcaption>Figure 7 — Access rule: A AND (B OR E) AND NOT L.</figcaption>
+      </figure>
+
+      <div class="answer-box">
+        <strong>Expression:</strong> <code class="mono">A AND (B OR E) AND NOT L</code><br />
+        <strong>Truth table:</strong> (1,0,0,0)→1 · (1,0,0,1)→0 · (0,1,1,0)→0<br />
+        <strong>Fragment:</strong> <code class="mono">53</code> (ASCII S)
+      </div>
+    </section>
+
+    <section id="room6">
+      <h2>Room 6 — The Algorithm Vault</h2>
+      <p class="meta">Syllabus §9.2, §19.1 · Algorithms, ADTs, Big O · ~7 min · Fragment: <code class="mono">45</code></p>
+
+      <figure>
+        <img src="images/room6-algorithms.png" alt="Algorithm analysis answers linear search stack factorial Big O" />
+        <figcaption>Figure 8 — Unsorted data → linear search; recursion → stack; merge sort → O(n log n).</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Question</th><th>Answer</th></tr>
+        <tr><td>Search type (unsorted list)</td><td class="mono">linear</td></tr>
+        <tr><td>ADT for recursive calls</td><td class="mono">stack</td></tr>
+        <tr><td>factorial(4)</td><td class="mono">24</td></tr>
+        <tr><td>Merge sort complexity</td><td class="mono">O(n log n)</td></tr>
+        <tr><td>Optional bonus (paradigm)</td><td class="mono">OOP</td></tr>
+        <tr><td>Key fragment</td><td class="mono">45</td></tr>
+      </table>
+    </section>
+
+    <section id="vault">
+      <h2>Final vault — Exam Archive</h2>
+      <p class="meta">Meta-puzzle · ~5 min · Unlock phrase: <code class="mono">SECURE</code></p>
+
+      <figure>
+        <img src="images/final-vault-secure.png" alt="Final vault solution ordering fragments to spell SECURE" />
+        <figcaption>Figure 9 — Reorder by TCP/IP layer, convert hex bytes to ASCII, enter SECURE.</figcaption>
+      </figure>
+
+      <ol>
+        <li>Reorder fragment cards by stack layer (1 → 7), not room number.</li>
+        <li>Correct room order: <code class="mono">room5 → room1 → room2 → room4 → room3 → room6</code></li>
+        <li>Hex: <code class="mono">53 45 43 55 52 45</code></li>
+        <li>ASCII: <strong>SECURE</strong></li>
+      </ol>
+    </section>
+
+    <section id="completion">
+      <h2>Completion &amp; scoring</h2>
+
+      <figure>
+        <img src="images/step-09-completion.png" alt="Mission complete debrief screen" />
+        <figcaption>Figure 10 — Completion screen: time, score, hints, and debrief.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Component</th><th>Value</th></tr>
+        <tr><td>Base score</td><td>1000</td></tr>
+        <tr><td>Time bonus</td><td>Up to ~450 (under 45 min)</td></tr>
+        <tr><td>Hint penalty</td><td>−35 per hint</td></tr>
+        <tr><td>Attempt penalty</td><td>−12 per attempt beyond 6</td></tr>
+        <tr><td>Room 6 bonus (OOP)</td><td>+75</td></tr>
+      </table>
+    </section>
+
+    <section id="plenary">
+      <h2>Plenary questions</h2>
+      <ol>
+        <li>How does each puzzle room map to a layer of the TCP/IP model?</li>
+        <li>Why is phishing not defeated by strong passwords alone?</li>
+        <li>What is the difference between data privacy and data integrity?</li>
+        <li>Why does TLS use both symmetric and asymmetric encryption?</li>
+        <li>When can binary search be used — and when must you use linear search?</li>
+        <li>Which single countermeasure would <em>not</em> alone have stopped this fictional breach?</li>
+      </ol>
+
+      <h3 style="color: var(--purple); margin-top: 2rem;">Quick answer card</h3>
+      <pre class="mono" style="background: var(--panel); padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.8rem;">Room 1: 83, 45, -1, C → fragment 45
+Room 2: dns→syn→route→http→fin, private_ip → fragment 43
+Room 3: match table above → fragment 52
+Room 4: key table, reject fake cert → fragment 55
+Room 5: A AND (B OR E) AND NOT L → fragment 53
+Room 6: linear, stack, 24, O(n log n) → fragment 45
+Vault: layer order → SECURE</pre>
+    </section>
+
+    <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem;">
+      Operation Blackout · Cambridge CS 9618 · Teacher guide v1.0 · In-app teacher mode: <code>/teacher</code>
+    </footer>
+  </div>
+</body>
+</html>
