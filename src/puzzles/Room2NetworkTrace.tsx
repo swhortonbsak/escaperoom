@@ -48,7 +48,7 @@ export function Room2NetworkTrace() {
           <h3 className="mb-2 text-sm font-semibold text-slate-200">Network map</h3>
           <div className="rounded-lg border border-cyber-border bg-black/30 p-4 text-xs text-cyber-muted">
             <p>[Client 192.168.12.8] —LAN— [Gateway/NAT 198.51.100.7] —WAN— [Router] — [Server 203.0.113.44:443]</p>
-            <p className="mt-2">URL: https://archive.uni-lab.edu/vault</p>
+            <p className="mt-2">URL: https://archive.bsak.edu/vault</p>
           </div>
         </div>
         <div>

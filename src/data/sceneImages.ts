@@ -20,7 +20,7 @@ export const sceneImages: Record<RoomId, SceneConfig> = {
   intro: {
     src: sceneIntro,
     alt: 'Cyber operations briefing room with locked Exam Archive vault on screen',
-    caption: 'Uni-Lab Research — Incident response activated',
+    caption: 'BSAK — Incident response activated',
   },
   room1: {
     src: sceneRoom1,

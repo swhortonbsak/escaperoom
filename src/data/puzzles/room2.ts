@@ -38,7 +38,7 @@ export const room2Meta: PuzzleMeta = {
 };
 
 export const room2Events = [
-  { id: 'dns', label: 'DNS lookup', detail: 'Resolver queries authoritative DNS for archive.uni-lab.edu → 203.0.113.44' },
+  { id: 'dns', label: 'DNS lookup', detail: 'Resolver queries authoritative DNS for archive.bsak.edu → 203.0.113.44' },
   { id: 'syn', label: 'TCP SYN', detail: 'Client 192.168.12.8:52431 → 203.0.113.44:443 [SYN]' },
   { id: 'route', label: 'Router forward', detail: 'Campus gateway NAT 192.168.12.8 → 198.51.100.7, packet routed via ISP' },
   { id: 'http', label: 'HTTP GET /vault', detail: 'TLS established; GET /vault HTTP/1.1 → 200 OK (encrypted payload)' },

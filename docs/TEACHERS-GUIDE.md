@@ -87,7 +87,7 @@ Students enter an optional callsign and click **Accept mission**.
 
 ### Solution — event order (earliest first)
 
-1. **DNS lookup** — resolve `archive.uni-lab.edu` → 203.0.113.44  
+1. **DNS lookup** — resolve `archive.bsak.edu` → 203.0.113.44  
 2. **TCP SYN** — client initiates connection to :443  
 3. **Router forward** — NAT 192.168.12.8 → public address  
 4. **HTTP GET /vault** — TLS payload exchange  

@@ -39,7 +39,7 @@ export function IntroPage() {
             Operation Blackout
           </h1>
           <p className="mt-3 max-w-2xl text-slate-300">
-            A suspicious breach has locked the Exam Archive Vault at Uni-Lab Research. As junior cyber
+            A suspicious breach has locked the Exam Archive Vault at BSAK. As junior cyber
             analysts, you must trace the attack, recover six encrypted key fragments, and restore
             defensive control — using only forensic analysis, not offensive tooling.
           </p>

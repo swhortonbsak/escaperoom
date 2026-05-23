@@ -72,8 +72,8 @@ export const room4CorrectAssignments: Record<string, string> = {
 };
 
 export const room4Certificates = [
-  { id: 'valid', subject: 'CN=archive.uni-lab.edu', issuer: 'Cambridge Research CA', trusted: true },
-  { id: 'fake', subject: 'CN=archive.uni-lab.edu', issuer: 'UnknownCA Self-Signed', trusted: false },
+  { id: 'valid', subject: 'CN=archive.bsak.edu', issuer: 'Cambridge Research CA', trusted: true },
+  { id: 'fake', subject: 'CN=archive.bsak.edu', issuer: 'UnknownCA Self-Signed', trusted: false },
 ];
 
 export const room4RejectId = 'fake';
